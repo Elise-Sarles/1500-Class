@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>See your Day</title>
+    <link href="webday.css" rel ="stylesheet"/>
+</head>
+<body>
+
+    <h1>Day log Stamp</h1>
+
+    <section class="stamp"> 
+        <h3>Your Day!</h3>
+        <?php
+        $document_root = $_SERVER['DOCUMENT_ROOT'];
+        //Create variables
+        $dayval = $_POST['dayval'];
+        $hugnum =  $_POST['hugnum'];
+        $daytype = array('Miserable','Poor', 'Rough', "T'was a Day", 'Eugh', 'Normal', 'Decent', 'Good', 'Great', 'Fantastic');
+        $descr = $_POST['descr'];
+        $date = date('H:i, jS F Y');
+        $outputstring = $date."\t".$dayval."\t".$daytype[($dayval - 1)]."\t".$hugnum."\t".$descr."\n";
+
+        echo 'Day value score: '.htmlspecialchars($dayval).'<br />';
+        echo 'Day value Expression: '.$daytype[($dayval - 1)].'<br />';
+
+        echo 'Hug count: '.htmlspecialchars($hugnum).'<br />';
+
+        echo '<p>'.$descr.'</p>';
+
+
+        $fp = @fopen("$document_root/../code/website/day.txt", 'ab');
+        if(!$fp){
+            echo "<p><strong>Your day could not be saved at this time. Please try again later.</strong></p></body></html>";
+            exit;
+        }
+        flock($fp, LOCK_EX);
+        fwrite($fp, $outputstring, strlen($outputstring));
+        flock($fp, LOCK_UN);
+        fclose($fp);
+
+        echo "<p>Order written.</p>"
+
+        ?>
+
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Rate your Day</title>
+    <link href="webday.css" rel ="stylesheet"/>
+</head>
+<body>
+    <h1 id="pagetitle">Your Day</h1>
+    <section id="questionnaire">
+        <form action="processday.html" method="post">
+            <div>
+                <label for="val">On a scale how would you rate your day?</label>
+                <p>
+                "Miserable"
+                <input type="range" id="val" name="dayval" min="1" max="10" class="slider">
+                "Fantastic"
+                </p>
+            </div>
+            <div>
+                <label for ="hugnum">How many hugs did you get/give today?</label>
+                <input type="number" id="hugnum" name="hugnum" value="1" min="0" step="1" max="100">
+                <br/>
+            </div>
+            <div>
+                <label>Tell us a little about your day! <br/></label>
+                <textarea id="description" name="descr" ></textarea>
+            </div>
+
+            <input type="submit" value="Submit day"/>
+        
+        </form>
+    </section>
+</body>
+</html>
